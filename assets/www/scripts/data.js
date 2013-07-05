@@ -30,10 +30,8 @@ var onDeviceReady = function() {
     return false;
   });
   var validator = $("#basicForm").validate({
-    rules : {
-      field : {
-        required : true
-      }
+    errorPlacement: function(error, element) {
+      error.insertAfter($(element).parent());
     }
   });
 

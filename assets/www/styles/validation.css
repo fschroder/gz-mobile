@@ -1,0 +1,6 @@
+label.error {
+  font-weight: bold;
+  padding-top: 5px;
+  display: block;
+  color: red;
+}
