@@ -1,14 +1,4 @@
-var serializeObject = function(element) {
-  var fields = $(element).serializeArray();
-  var object = {};
-  jQuery.each(fields, function(i, field) {
-    object[field.name] = field.value;
-  });
-  return object;
-};
-
 var showResult = function() {
-
   var obj = serializeObject("form");
 
   var gender = (obj['gender'] == 'male') ? 'Mr.' : 'Ms.';
@@ -17,9 +7,6 @@ var showResult = function() {
   msg += '<p>Message: ' + obj['needs'] + '</p>';
 
   $("#dataResult").append(msg);
-  // jQuery.each(fields, function(i, field) {
-  // $("#dataResult").append(field.value + " ");
-  // });
 };
 
 var onDeviceReady = function() {
