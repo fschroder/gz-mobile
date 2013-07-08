@@ -1,40 +1,36 @@
-var showResult = function() {
-  var obj = serializeObject("form");
-
-  var gender = (obj['gender'] == 'male') ? 'Mr.' : 'Ms.';
-  var msg = '<p>Hello ' + gender + obj['name'] + '</p>';
-  msg += '<i>Your email is: ' + obj['email'] + '</i>';
-  msg += '<p>Message: ' + obj['needs'] + '</p>';
-
-  $("#dataResult").append(msg);
-};
-
 var onDeviceReady = function() {
-  $("#data2").css('display', 'none');
-  $("#dataResult").css('display', 'none');
+  $( "#data2" ).css( 'display', 'none' );
 
-  $("form").submit(function() {
+  $( "form" ).submit( function() {
     return false;
-  });
-  var validator = $("#basicForm").validate({
-    errorPlacement: function(error, element) {
-      error.insertAfter($(element).parent());
+  } );
+  var validator = $( "#basicForm" ).validate( {
+    errorPlacement: function( error, element ) {
+      error.insertAfter( $( element ).parent() );
     }
-  });
+  } );
 
-  $("#submit1").click(function() {
-    if (validator.form()) {
-      $("#data1").css('display', 'none');
-      $("#data2").css('display', 'block');
+  $( "#submit1" ).click( function() {
+    if ( validator.form() ) {
+      var p = new Person( "form" );
+      p.greet();
+      /* Using a Person with callback function */
+//      p.onFinish( function( result ) {
+//        alert( result.name );
+//      } );
+      $( "#data1" ).css( 'display', 'none' );
+      $( "#data2" ).css( 'display', 'block' );
     }
-  });
+  } );
 
-  $("#submit2").click(function() {
-    $("#data2").css('display', 'none');
-    $("#dataResult").css('display', 'block');
-    showResult();
-  });
+  $( "#submit2" ).click( function() {
+    $( "#data2" ).css( 'display', 'none' );
+
+    // Show result
+    msg = '<p>Message: ' + $( '#needs' ).val() + '</p>';
+    $( "#dataResult" ).append( msg );
+  } );
 
 };
 
-$(document).ready(onDeviceReady);
+document.addEventListener( "deviceready", onDeviceReady );
