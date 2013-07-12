@@ -1,7 +1,7 @@
 var Person = Class.extend( {
   init: function( authForm ) {
     var obj = serializeObject( authForm );
-    var img = encodeURIComponent( 'https://www.dropbox.com/s/17aql8fxlwptfl3/Boston%20City%20Flow.jpg' );
+    var img = encodeURIComponent( 'http://i39.tinypic.com/kbtam8.jpg' );
     this.url = encodeURI( "http://echo.jsontest.com/name/" + obj.name + "/email/" + obj.email + "/gender/" + obj.gender + "/img/" + img );
     this.request = $.ajax( {
       url: this.url,
@@ -25,9 +25,11 @@ var Person = Class.extend( {
       this.result = _result;
       var gender = ( this.result.gender == 'male' ) ? 'Mr. ' : '';
       gender = ( this.result.gender == 'female' ) ? 'Ms. ' : '';
-      $( '#subtitle' ).html( "Welcome " + gender + decodeURI( this.result.name ) + " <i>(" + decodeURI( this.result.email ) + ")</i>" );
-      $( "#imageResult" ).append( '<img alt="" src="' + decodeURIComponent( decodeURIComponent( _result.img ) ) + '" />' );
-
+      var name = decodeURIComponent( this.result.name );
+      var email = decodeURIComponent( this.result.email );
+      var img = decodeURIComponent( decodeURIComponent( this.result.img ) );
+      $( '#subtitle' ).html( "Welcome " + gender + name + " <i>(" + email + ")</i>" );
+      $( "#imageResult" ).append( '<img alt="" src="' + img + '" />' );
     } );
   }
 } );
